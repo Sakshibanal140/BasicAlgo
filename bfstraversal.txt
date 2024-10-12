@@ -1,0 +1,39 @@
+#include<iostream>
+using namespace std;
+struct Node
+{
+    int val;
+    Node *left,*right;
+    Node(int val)
+    {
+        val=val;
+        left = right = nullptr;
+    }
+}
+void bfs(Node *root)
+{
+    queue<Node*> q;
+    if (root == nullptr)
+        return;
+    q.push(root);
+    while(!q.empty())
+    {
+        Node *curr = q.front();
+        q.pop();
+        cout<<curr->val;
+        if(curr->left)
+        q.push(curr->left);
+        if(curr->right)
+        q.push(curr->right);
+    }
+}
+int main()
+{
+    Node* node = new Node(1);
+    node->left = new Node(2);
+    node->right = new Node(3);
+    node->left->left = new Node(4);
+    node->left->right = new Node(5);
+    // dfs using preorder traversal of a graph
+    bfs(node);
+}
